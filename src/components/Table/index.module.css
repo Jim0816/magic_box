@@ -1,0 +1,37 @@
+.container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.top{
+    float: left;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #3CFFFF;
+}
+
+.bottom{
+    float: left;
+    width: 100%;
+    height: calc(100% - 30px);
+    overflow: auto;
+}
+
+.row{
+    float: left;
+    width: 100%;
+    height: 30px;
+}
+
+.col{
+    float: left;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 30px;
+    color: white;
+}
+
+
