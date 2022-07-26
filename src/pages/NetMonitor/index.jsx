@@ -3,6 +3,7 @@ import { message } from 'antd';
 import netmap from './index.module.css'
 import right from '../../asserts/photo/right.png'
 import Table from '../../components/Table';
+import Chart from '../../components/Chart';
 
 const menus = ['网络名称', '信号强度', '通道宽度', '频率', '干扰', '遗失', '最大RSSI']
 const titles = ['SSID', 'IP', 'MAC地址', '信号强度', '网络类型', '上传/mpbs', '下载/mpbs', '安全性', '基础结构', 'DNS', '网关', 'max rate', '延时', 'vendor', 'generation', '地区代码', 'seen (是否可见)', '注释']
@@ -19,6 +20,7 @@ export default class index extends Component {
    }
 
    componentDidMount() {
+      
    }
 
  
@@ -72,7 +74,9 @@ export default class index extends Component {
 
 
             {/* 右边中间布局 图表展示*/}
-            <div className={netmap.right_bottom} style={{'backgroundColor': '#252026'}}></div>
+            <div className={netmap.right_bottom} style={{'backgroundColor': '#252026'}}>
+              <Chart/>
+            </div>
           </div>
       </div>
     )
