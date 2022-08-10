@@ -4,7 +4,7 @@
  import axios from "axios";
 
  axios.defaults.timeout = 100000;
- axios.defaults.baseURL = "http://127.0.0.1:8000";
+ axios.defaults.baseURL = "http://101.43.173.159:8002";
  
  /**
   * http request 拦截器

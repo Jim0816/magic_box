@@ -16,12 +16,12 @@ function index(props) {
       {/* 页面切换导航栏 */}
       {adminRoutes.map((route, index) => {
         return(
-          <span className={frame.app_top_item} style={{left: (index + 1) * 170 + 'px', width: '150px'}} 
+          <span key={index} className={frame.app_top_item} style={{left: (index + 1) * 170 + 'px', width: '150px'}} 
           onClick={e => props.history.push(route.path)}>
             <span className={frame.app_top_item_img}>
               <img src={curPath === route.path ? route.showIcon : route.hideIcon} style={{height: "100%", width: "100%"}}></img>
             </span>
-            <text className={frame.app_top_item_text} style={{'color': curPath === route.path? '#3BFCFB' : '#B0B0AF'}}>{route.title}</text>
+            <label className={frame.app_top_item_text} style={{'color': curPath === route.path? '#3BFCFB' : '#B0B0AF'}}>{route.title}</label>
           </span>
         );
       })}
@@ -29,7 +29,7 @@ function index(props) {
       <span className={frame.app_top_title}>智能网络监测后台</span>
 
       <span className={frame.app_top_exit}>
-        <text>退出</text>
+        <label>退出</label>
         <span className={frame.app_top_exit_img}>
           <img src={exit} style={{height: "100%", width: "100%"}}></img>
         </span>

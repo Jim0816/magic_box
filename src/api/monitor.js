@@ -2,11 +2,8 @@ import http from '../utils/request';
 
 
 
-/**
- * 推送markers数据到后端
- */
 function getList(){
-  return  http("get",'/info/get', {});
+  return  http("get",'/watch/list', {});
 }
 
 function add(data){

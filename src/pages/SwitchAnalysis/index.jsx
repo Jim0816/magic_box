@@ -55,7 +55,7 @@ export default class index extends Component {
             </div>
           </div>
           <div className={switchAnalysis.box_right}>
-            <div className={switchAnalysis.box_right_top}>
+            {/* <div className={switchAnalysis.box_right_top}>
               <span className={switchAnalysis.box_right_top_select}>
               <label style={{'fontSize': '18px', 'lineHeight': '50px', 'fontWeight': 'bold'}}>选择来源: </label>
               </span>
@@ -67,10 +67,11 @@ export default class index extends Component {
                 <span className={switchAnalysis.box_right_top_events_item} style={{'backgroundColor': '#43FFC0'}}>事件添加</span>
               </span>
             </div>
-            {/* 时序图组件 */}
+            
             <div className={switchAnalysis.box_right_bottom}>
               <ActionPlayer/>
-            </div>
+            </div> */}
+            <ActionPlayer/>
           </div>
         </div>
       </div>

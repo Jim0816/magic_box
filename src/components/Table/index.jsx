@@ -7,7 +7,7 @@ const header = [
   {'name': 'select', 'width': '3%', 'background': 'none', 'color': '#3CFFFF'},
   {'name': '网络名称', 'width': '17%', 'background': 'none', 'color': '#3CFFFF'},
   {'name': '信号强度', 'width': '15%', 'background': 'none', 'color': '#3CFFFF', 'sorted': true},
-  {'name': '通道', 'width': '10%', 'background': 'none', 'color': '#3CFFFF', 'sorted': true},
+  {'name': '信道', 'width': '10%', 'background': 'none', 'color': '#3CFFFF', 'sorted': true},
   {'name': '通道宽度', 'width': '10%', 'background': 'none', 'color': '#3CFFFF'},
   {'name': '频率', 'width': '10%', 'background': 'none', 'color': '#3CFFFF'},
   {'name': '干扰', 'width': '5%', 'background': 'none', 'color': '#3CFFFF'},
@@ -39,35 +39,71 @@ export default class index extends Component {
     header: [],
     data: [],
     select: [],
-    all_select: false
+    all_select: false,
+    cur_show_data: {},
+    click_data_id: '',
+  }
+
+  constructor(props){
+    super(props)
   }
 
 
-
   componentDidMount(){
-
-    // 初始化数据
+    let new_data = this.format_data(this.props.dataList)
     let select = []
-    for (let i = 0 ; i < data.length ; i++){
+    for (let i = 0 ; i < new_data.length ; i++){
       select[i] = 0
     }
 
     this.setState({
       header: header,
-      data: data,
+      data: new_data,
       select: select
     })
+  }
 
+  format_data = (dataList) => {
+    // 将每行数据转为数组
+    let data = []
+    let dataColNum = header.length - 1
+    for (let i = 0 ; i < dataList.length ; i++){
+      let item = dataList[i]
+      let row = []
+      row.push(item.id)
+      row.push(item.wlan_mgt.wlan_ssid) //网络名称
+      row.push(item.wlan_radio.wlan_radio_signal_dbm) // 信号强度
+      row.push(item.radiotap_present.radiotap_present_channel) // 信道
+      row.push('') // 通道宽度
+      row.push(item.wlan_radio.wlan_radio_frequency) // 频率
+      row.push(item.radiotap_present.radiotap_present_dbm_antnoise) // 干扰
+      row.push('') // 支持速率
+      row.push('') //遗失
+      row.push('') // 最大rssi
+      //console.log(item)
+      data.push(row)
+    }
+    return data
+  }
+
+  // 点击某行，查看详细数据
+  click_row = (row) => {
+    let {data} = this.state
+    this.state.click_data_id = data[row][0]
+    this.props.click(row)
+    this.forceUpdate()
   }
 
   render() {
-    let {header, data, select, all_select} = this.state
+    this.state.data = this.format_data(this.props.dataList)
+    let {header, data, select, all_select, click_data_id} = this.state
+
     return (
       <div className={table.container}>
         <div className={table.top}>
           {header.map((item, index) => {
             return(
-              <span style={{float: 'left', width: item.width, height: '100%', backgroundColor: item.background}}>
+              <span key={index} style={{float: 'left', width: item.width, height: '100%', backgroundColor: item.background}}>
                 {/* 是否为勾选 */}
                 {
                   item.name === 'select' ? 
@@ -89,18 +125,20 @@ export default class index extends Component {
         </div>
         <div className={table.bottom}>
           {data.map((row, row_index) => {
+            let bgColor = row[0] == click_data_id ? '#171217' : (row_index % 2 == 0 ? '#373237' : '#4C484D')
             return(
-              <diiv className={table.row} style={{backgroundColor: row_index % 2 == 0 ? '#373237' : '#4C484D'}}>
+              <div key={row_index} className={table.row} style={{backgroundColor: bgColor}} onClick={e => {this.click_row(row_index)}}>
                 {/* 每列 */}
                 {header.map((col, col_index) => {
                   return(
-                    <span style={{float: 'left', width: col.width, height: '100%'}}>
+                    <span key={col_index} style={{float: 'left', width: col.width, height: '100%'}}>
                       {/* 是否为勾选 */}
                       {
                         col.name === 'select' ? 
                         // 勾选列
                         <span style={{float: 'right',marginRight: '10px', marginTop: '9px', width: '10px', height: '10px', cursor: 'pointer', backgroundColor: select[row_index] == 1 ? '#3CFFFF' : 'white'}} onClick={e => {this.select(e, row_index)}}></span> : 
                         // 内容列
+                        // <span className={table.col}>{row.length < header.length ? row[col_index - 1] : row[col_index]}</span>
                         <span className={table.col}>{row.length < header.length ? row[col_index - 1] : row[col_index]}</span>
                       }
                     </span>
@@ -113,7 +151,7 @@ export default class index extends Component {
                   // 数据展示列
                   <span className={table.col}></span>
                 } */}
-              </diiv>
+              </div>
             );
           })}
           

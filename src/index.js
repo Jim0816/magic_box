@@ -23,7 +23,7 @@ root.render(
       {/* 进入系统级别界面 */}
       {mainRoutes.map(route => {return <Route key={route.path} {...route}></Route>})}
       {/* 以上界面都没有找到，则进入404界面 */}
-      <Redirect to="/admin/switch" />
+      <Redirect to="/admin/monitor" />
     </Switch>
   </Router>
 );
