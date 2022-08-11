@@ -7,10 +7,13 @@ import logo2 from '../../asserts/photo/logo2.png'
 import bubble from '../../asserts/photo/bubble.png'
 
 import ActionPlayer from '../../components/ActionPlayer'
+import ReactJson from 'react-json-view'
+
 
 export default class index extends Component {
 
   state = {
+    protocol: {}
   };
 
 
@@ -19,10 +22,18 @@ export default class index extends Component {
    }
 
    componentDidMount() {
+    fetch('https://269eh07272.zicp.fun/data?num=100')
+    .then(res =>{
+      return res.json()
+    }).then(data =>{
+      this.state.protocol = data
+      this.forceUpdate()
+    })
    }
 
  
   render() {
+    let {protocol} = this.state
     return (
       <div className={switchAnalysis.container}>
         <div className={switchAnalysis.box}>
@@ -51,7 +62,9 @@ export default class index extends Component {
             <div style={{'width': '100%', 'height': '10px'}}></div>
             <div className={switchAnalysis.box_left_bottom}>
               <span className={switchAnalysis.box_left_bottom_title}>原始报文展示</span>
-              <span className={switchAnalysis.box_left_bottom_content}></span>
+              <span className={switchAnalysis.box_left_bottom_content}>
+                <ReactJson src={protocol} />
+              </span>
             </div>
           </div>
           <div className={switchAnalysis.box_right}>

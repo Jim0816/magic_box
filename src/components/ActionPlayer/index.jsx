@@ -8,6 +8,7 @@ import red_label from '../../asserts/photo/red_label.png'
 import dir_up from '../../asserts/photo/dir_up.png'
 import dir_down from '../../asserts/photo/dir_down.png'
 
+
 const entity_list = ['协议栈0', '协议栈1', '协议栈2', '协议栈3', '协议栈4', '协议栈5']
 const time_list = ['9:02', '9:03', '9:04', '9:05', '9:06', '9:07', '9:08', '9:09', '9:10', '9:11', '9:12', '9:13', '9:14', '9:15','9:16', '9:17', '9:18', '9:19', '9:20', '9:21', '9:22', '9:23', '9:24', '9:25', '9:26', '9:27', '9:28', '9:29']
 const item_width = 100
@@ -24,7 +25,7 @@ const action_list = [
 
 export default class index extends Component {
   componentDidMount(){
-
+    //console.log(data)
   }
 
 

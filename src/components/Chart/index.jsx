@@ -11,9 +11,12 @@ export default class index extends Component {
   }
 
   render() {
+    let num = this.props.num
     return (
       <div className={chart.container}>
-        <div className={chart.top}></div>
+        <div className={chart.top}>
+          <label style={{marginLeft: '25px', color: '#FFFFFF', lineHeight: '30px', fontWeight: 'bold'}}>数量: {num}</label>
+        </div>
         <div className={chart.bottom}>
           <div style={{position: 'relative', width: '100%', height: '100%', }}>
             <span className={chart.bottom_chart_line} style={{height: '4px', top: '20px', backgroundColor: '#28B8B9'}}></span>

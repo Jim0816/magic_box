@@ -16,6 +16,7 @@
     "react-bmapgl": "^0.2.4",
     "react-dom": "^18.1.0",
     "react-draggable": "^4.4.5",
+    "react-json-view": "^1.21.3",
     "react-router-dom": "5",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",

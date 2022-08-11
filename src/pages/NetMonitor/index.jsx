@@ -39,9 +39,6 @@ export default class index extends Component {
 
   constructor(props) {
     super(props)
-   }
-
-   componentDidMount() {
     getList().then(
       res => {
         this.state.dataList = res.data
@@ -54,6 +51,28 @@ export default class index extends Component {
         console.log(err)
       }
     )
+   }
+
+   componentDidMount() {
+
+    setInterval(() => {
+      getList().then(
+        res => {
+          if (res.data.length != this.state.dataList){
+            this.state.dataList = res.data
+            //console.log(res.data)
+            this.forceUpdate()
+          }
+        }
+      ).catch(
+        err => {
+          message.error('数据加载失败')
+          console.log(err)
+        }
+      )
+    }, 5000);
+
+    
    }
 
   change_show_data_detail = (row) => {
@@ -131,7 +150,7 @@ export default class index extends Component {
 
             {/* 右边中间布局 图表展示*/}
             <div className={netmap.right_bottom} style={{'backgroundColor': '#252026'}}>
-              <Chart/>
+              <Chart num={dataList.length}/>
             </div>
           </div>
       </div>
