@@ -58,11 +58,15 @@ export default class index extends Component {
     setInterval(() => {
       getList().then(
         res => {
-          if (res.data.length != this.state.dataList){
-            this.state.dataList = res.data
+          // if (res.data.length != this.state.dataList){
+          //   this.state.dataList = res.data
+          //   //console.log(res.data)
+          //   this.forceUpdate()
+          // }
+          this.state.dataList = res.data
+          console.log(res.data)
             //console.log(res.data)
             this.forceUpdate()
-          }
         }
       ).catch(
         err => {
@@ -129,6 +133,10 @@ export default class index extends Component {
                       cur_map = cur_map[classKey[i]]
                       cur_value = cur_map
                     }
+                  }
+
+                  if (item.label == 'SSID'){
+                    cur_value = cur_value.indexOf('000') != -1 ? 0 : cur_value
                   }
                   //console.log(cur_value)
 

@@ -71,11 +71,12 @@ export default class index extends Component {
       let item = dataList[i]
       let row = []
       row.push(item.id)
-      row.push(item.wlan_mgt.wlan_ssid) //网络名称
+      let name = item.wlan_mgt.wlan_ssid
+      row.push(name.indexOf('000') != -1 ? 0 : name) //网络名称
       row.push(item.wlan_radio.wlan_radio_signal_dbm) // 信号强度
       row.push(item.radiotap_present.radiotap_present_channel) // 信道
       row.push('') // 通道宽度
-      row.push(item.wlan_radio.wlan_radio_frequency) // 频率
+      row.push(item.wlan_radio.wlan_radio_signal_frequency) // 频率
       row.push(item.radiotap_present.radiotap_present_dbm_antnoise) // 干扰
       row.push('') // 支持速率
       row.push('') //遗失
